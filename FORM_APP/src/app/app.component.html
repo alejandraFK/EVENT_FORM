@@ -1,0 +1,24 @@
+<div class="container py-3">
+  <div class="row">
+    <h3>Información de eventos</h3>
+  </div>
+  <div class="row rounded border py-3">
+    <div class="d-flex justify-content-between">
+      <div class="col-3">
+        <label class="form-label">Tipo</label>
+        <ng-select [items]="TipoEventos" [(ngModel)]="filtros.tipo"></ng-select>
+      </div>
+      <div class="col-3">
+        <label class="form-label">Fecha Inicio</label>
+        <input type="date" class="form-control" [(ngModel)]="filtros.fechaInicio" [max]="filtros.fechaFin" />
+      </div>
+      <div class="col-3">
+        <label class="form-label">Fecha Fin</label>
+        <input type="date" class="form-control" [(ngModel)]="filtros.fechaFin" [min]="filtros.fechaInicio">
+      </div>
+    </div>
+    <div class="d-flex justify-content-end mt-2">
+      <button type="button" class="w-auto btn blue-primary">Buscar</button>
+    </div>
+  </div>
+</div>
