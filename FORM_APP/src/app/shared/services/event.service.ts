@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Ievent } from '../interfaces/ievent';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,12 @@ export class EventService {
   constructor(private http: HttpClient) { }
 
   getInfo(): Observable<any> {
-    return this.http.get(environment.MOCKS);
+    return this.http.get(environment.MOCKS, { observe: 'response' });
   }
-  searchEvents(tipo: string, fechaInicio: string, fechaFin: string): Observable<any> {
-    return this.http.get(`${environment.MOCKS}/events?tipo=${tipo}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}`);
+  postEvent(request: Ievent): Observable<any> {
+    return this.http.post(environment.MOCKS, request, { observe: 'response' });
+  }
+  searchEvents(type: string, initDate: string | Date, endDate: string | Date): Observable<any> {
+    return this.http.get(`${environment.MOCKS}/events?type=${type}&initDate=${initDate}&endDate=${endDate}`, { observe: 'response' });
   }
 }

@@ -1,1 +1,59 @@
-<p>consult-event works!</p>
+<div class="container">
+    <h3>Información de eventos</h3>
+    <div class="row mb-2">
+        <app-response-selector></app-response-selector>
+    </div>
+    <div class="row">
+        <div class="rounded border py-4 bg-white px-5">
+            <div class="d-flex justify-content-between">
+                <div class="col-3">
+                    <label class="form-label">Tipo <span class="text-muted">Obligatorio</span></label>
+                    <ng-select placeholder="Elige el tipo de evento" [items]="eventType"
+                        [(ngModel)]="filters.type"></ng-select>
+                </div>
+                <div class="col-3">
+                    <label class="form-label">Fecha Inicio <span class="text-muted">Obligatorio</span></label>
+                    <input type="date" class="form-control" [(ngModel)]="filters.initDate" [max]="filters.endDate" />
+                </div>
+                <div class="col-3">
+                    <label class="form-label">Fecha Fin <span class="text-muted">Obligatorio</span></label>
+                    <input type="date" class="form-control" [(ngModel)]="filters.endDate" [min]="filters.initDate">
+                </div>
+            </div>
+            <div class="d-flex justify-content-end mt-3">
+                <button type="button" class="w-auto btn button-primary" [disabled]="validFilters"
+                    (click)="onSubmit()">Buscar
+                    <i class="ms-2 bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="row mt-3 text-center">
+        @if (eventsInfo.length
+        <= 0) { <span>Aún no hay resultados.</span>
+            }@else {
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            @for (item of headers; track $index) {
+                            <th>{{item}}</th>
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (item of eventsInfo; track $index) {
+                        <tr>
+                            <td>{{item.id}}</td>
+                            <td>{{item.type}}</td>
+                            <td>{{item.date|date:'dd/MM/yyyy'}}</td>
+                            <td>{{item.description}}</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            }
+    </div>
+</div>

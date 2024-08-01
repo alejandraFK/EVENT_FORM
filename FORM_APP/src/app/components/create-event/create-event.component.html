@@ -1,1 +1,42 @@
-<p>create-event works!</p>
+<div class="container">
+    <h3>Formulario de eventos manuales</h3>
+    <div class="row mb-2">
+        <app-response-selector></app-response-selector>
+    </div>
+    <div class="rounded border bg-white py-5">
+        <div class="row justify-content-center">
+            <div class="col-3 me-2">
+                <label class="form-label fw-bold">Fecha:</label>
+                <span> {{eventForm.date|date:'dd/MM/yyyy'}}</span>
+            </div>
+            <div class="col-3">
+                <label class="form-label fw-bold">ID del evento:</label>
+                <span> {{eventForm.id}}</span>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-6">
+                <label class="form-label fw-bold">Tipo de evento:</label>
+                <input type="text" class="form-control" [(ngModel)]="eventForm.type" disabled />
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-6">
+                <label class="form-label fw-bold">Descripción</label>
+                <textarea class="form-control" placeholder="Describe brevemente el evento" [(ngModel)]="eventForm.description"></textarea>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-auto">
+                <button type="button" class="btn button-secondary">
+                    Cancelar
+                </button>
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn button-primary" [disabled]="!eventFormValid"
+                    (click)="onSubmit()">Agregar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

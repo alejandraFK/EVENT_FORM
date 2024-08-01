@@ -1,16 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
-@use '@angular/material' as mat;
 @import 'bootstrap/scss/bootstrap';
 @import "@ng-select/ng-select/themes/default.theme.css";
 
-@include mat.core();
+body {
+    background-color: #EEEEEE;
+    color: #11191D;
+}
 
-.blue-primary {
+.button-primary {
     background-color: #1E828F;
-    color: white;
+    color: #EEEEEE;
+
+    &:disabled {
+        background-color: #559999;
+        border: none;
+        color: #EEEEEE;
+    }
 
     &:hover {
-        background-color: #BAD9FF;
-        color: #636363;
+        background-color: #324b4f;
+        color: #EEEEEE;
+    }
+}
+
+.button-secondary {
+    background-color: #374957;
+    color: #EEEEEE;
+
+    &:hover {
+        background-color: #677989;
+        color: #EEEEEE;
+    }
+}
+
+.sidebar {
+    height: 100%;
+    position: fixed;
+    background-color: #11191D;
+    color: #EEEEEE;
+
+    &__list {
+        list-style: none;
+    }
+
+    &__item {
+        button {
+            &:hover {
+                background-color: #335555;
+            }
+        }
     }
 }

@@ -9,5 +9,11 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideNativeDateAdapter } from '@angular/material/core';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(), provideHttpClient(withFetch()), importProvidersFrom(NgbModule), provideAnimationsAsync('noop'), provideNativeDateAdapter()]
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes), provideClientHydration(),
+    provideHttpClient(withFetch()),
+    importProvidersFrom(NgbModule),
+    provideAnimationsAsync('noop'),
+    provideNativeDateAdapter()]
 };
