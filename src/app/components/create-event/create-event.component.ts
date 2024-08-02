@@ -18,19 +18,18 @@ import { HttpResponse, HttpResponseBase } from '@angular/common/http';
 })
 export class CreateEventComponent {
   eventForm!: Ievent;
-  responseSelected: string | undefined;
 
   constructor(private service: EventService, private alert: AlertService) {
     this.eventForm = {
       type: EventTypes.MANUAL,
       description: '',
-      date: new Date(),
+      date: new Date().toString(),
       id: Math.floor(Math.random() * (999 - 1 + 1)) + 1
     };
   }
 
   get eventFormValid(): boolean {
-    return this.eventForm.description.length >= 1 && this.responseSelected != undefined;
+    return this.eventForm.description.length >= 5;
   }
 
   async postEvent() {
@@ -42,7 +41,7 @@ export class CreateEventComponent {
           this.eventForm = {
             type: EventTypes.MANUAL,
             description: '',
-            date: new Date(),
+            date: new Date().toString(),
             id: Math.floor(Math.random() * (999 - 1 + 1)) + 1
           }
         } else {
