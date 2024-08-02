@@ -9,40 +9,29 @@ import { Ievent } from '../../shared/interfaces/ievent';
 import { Ifilter } from '../../shared/interfaces/ifilter';
 import { AlertService } from '../../shared/services/alert.service';
 import Swal from 'sweetalert2';
-import { ResponseTypes } from '../../shared/constants/response-types';
 import { EventTypes } from '../../shared/constants/event-types';
-import { ResponseSelectorComponent } from '../response-selector/response-selector.component';
 import { Subscription } from 'rxjs';
-import { ResponseTypeService } from '../../shared/services/response-type.service';
 
 @Component({
   selector: 'app-consult-event',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgSelectModule, ResponseSelectorComponent],
+  imports: [CommonModule, FormsModule, NgSelectModule],
   templateUrl: './consult-event.component.html',
   styleUrl: './consult-event.component.scss'
 })
-export class ConsultEventComponent implements OnInit, OnDestroy {
-  ResponseTypeSubscription: Subscription;
-
+export class ConsultEventComponent implements OnInit {
   filters: Ifilter = {
     type: undefined,
     initDate: undefined,
-    endDate: undefined,
-    response: undefined
+    endDate: undefined
   };
   eventsInfo: Ievent[] = [];
   eventType: string[] = Object.values(EventTypes);
-  responseType: string[] = Object.values(ResponseTypes);
   headers = [
     'ID', 'Tipo', 'Fecha', 'Descripción'
   ];
 
-  constructor(private service: EventService, private alert: AlertService, private behaviorResponse: ResponseTypeService) {
-    this.ResponseTypeSubscription = this.behaviorResponse.responseType.subscribe((response) => {
-      this.filters.response = response;
-    });
-  }
+  constructor(private service: EventService, private alert: AlertService) { }
 
   ngOnInit(): void {
     this.getEvents();
@@ -54,7 +43,7 @@ export class ConsultEventComponent implements OnInit, OnDestroy {
       if (res.body.length <= 0) {
         this.alert.info('Sin información', 'Búsqueda sin resultados.');
       } else {
-        this.eventsInfo = res.body;
+        this.eventsInfo = res.body.map((item: Ievent) => ({ ...item, type: item.type.includes('type') ? 'Evento API' : item.type }));
         Swal.close();
       }
     }, (error) => {
@@ -66,8 +55,7 @@ export class ConsultEventComponent implements OnInit, OnDestroy {
     this.filters = {
       type: undefined,
       initDate: undefined,
-      endDate: undefined,
-      response: undefined
+      endDate: undefined
     };
   }
 
@@ -92,44 +80,8 @@ export class ConsultEventComponent implements OnInit, OnDestroy {
       Swal.close();
   }
 
-  search() {
-    const filterValues = this.buildFilter();
-    this.service.searchEvents(filterValues.type, filterValues.initDate, filterValues.endDate).subscribe((res) => {
-      console.log(res);
-      Swal.close();
-    })
-  }
-
   get validFilters(): boolean {
     const filterValues = Object.values(this.filters);
     return filterValues.some(item => item == undefined);
-  }
-
-  onSubmit() {
-    Swal.showLoading(undefined);
-    switch (this.filters.response) {
-      case ResponseTypes.ok:
-        this.resetFilter();
-        this.filterInformation();
-        break;
-      case ResponseTypes.noContent:
-        this.search();
-        break;
-      case ResponseTypes.badRequest:
-
-        break;
-      case ResponseTypes.timeout:
-
-        break;
-      case ResponseTypes.serverError:
-
-        break;
-      default:
-        break;
-    }
-  }
-
-  ngOnDestroy(): void {
-    this.ResponseTypeSubscription
   }
 }

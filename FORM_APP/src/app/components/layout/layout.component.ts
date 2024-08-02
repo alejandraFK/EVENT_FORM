@@ -1,17 +1,31 @@
 import { Component } from '@angular/core';
-import { ConsultEventComponent } from '../consult-event/consult-event.component';
-import { CreateEventComponent } from '../create-event/create-event.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { RouterOutlet } from '@angular/router';
-import { DocumentationComponent } from '../documentation/documentation.component';
+import { Imenu } from '../../shared/interfaces/imenu';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [ConsultEventComponent, CreateEventComponent, SidebarComponent, DocumentationComponent, RouterOutlet],
+  imports: [SidebarComponent, RouterOutlet],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })
 export class LayoutComponent {
-
+  menu: Imenu[] = [
+    {
+      title: 'Registrar',
+      route: 'create',
+      icon: 'bi-plus-square'
+    },
+    {
+      title: 'Consultar',
+      route: 'consult',
+      icon: 'bi-search'
+    },
+    {
+      title: '¿Cómo funciona?',
+      route: 'documentation',
+      icon: 'bi-patch-question'
+    }
+  ];
 }

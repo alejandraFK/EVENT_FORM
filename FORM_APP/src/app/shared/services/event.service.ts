@@ -17,7 +17,4 @@ export class EventService {
   postEvent(request: Ievent): Observable<any> {
     return this.http.post(environment.MOCKS, request, { observe: 'response' });
   }
-  searchEvents(type: string, initDate: string | Date, endDate: string | Date): Observable<any> {
-    return this.http.get(`${environment.MOCKS}/events?type=${type}&initDate=${initDate}&endDate=${endDate}`, { observe: 'response' });
-  }
 }

@@ -1,10 +1,209 @@
-<div class="container">
+<div id="up" class="container">
     <div class="row py-3">
-        <h5>
+        <h4>
             Aplicación de Gestión de Eventos (Creación y Consulta)
-        </h5>
-        <p>
-            
-        </p>
+        </h4>
+    </div>
+    <div class="row">
+        <h5>Tabla de contenido</h5>
+        <ul class="px-4 py-2 border rounded col-3">
+            <li class="list-unstyled">Servicios
+                <ul>
+                    <li><a href="#eventos">Eventos</a></li>
+                    <li><a href="#alertas">Alertas</a></li>
+                </ul>
+            </li>
+            <li class="list-unstyled">Interfaces
+                <ul>
+                    <li><a href="#ievent">IEvent</a></li>
+                    <li><a href="#imenu">IMenu</a></li>
+                    <li><a href="#ifilter">IFilter</a></li>
+                </ul>
+            </li>
+            <li class="list-unstyled">Componentes
+                <ul>
+                    <li><a href="#sidebar">Sidebar</a></li>
+                    <li><a href="#registrar">Registrar</a></li>
+                    <li><a href="#consultar">Consultar</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="row">
+        <section id="eventos">
+            <h5>EventService</h5>
+            <p>El servicio <span class="fst-italic">EventService</span> se encarga de realizar peticiones HTTP a la API
+                de eventos. Este servicio es inyectable y se proporciona en la raíz de la aplicación.</p>
+            <strong>Métodos:</strong>
+            <ul class="ps-4">
+                <li>getInfo()
+                    <ul>
+                        <li>Descripción: Obtiene información general de la API de eventos</li>
+                        <li>Parámetros: Ninguno.</li>
+                        <li>Retorno: Un observable que emite la respuesta de la API en formato any.</li>
+                        <li>id: Identificador único del evento (generado aleatoriamente).</li>
+                    </ul>
+                </li>
+                <li>postEvent()
+                    <ul>
+                        <li>El método <span class="fst-italic">postEvent</span> utiliza el objeto <span
+                                class="fst-italic">HttpClient</span> de Angular para realizar una petición HTTP POST a
+                            la URL configurada en la variable environment.MOCKS. El cuerpo de la petición es el objeto
+                            request que se pasa como parámetro.</li>
+                        <li>La interfaz <span class="fst-italic">IEvent</span> define la estructura del objeto que se
+                            pasa como parámetro al método <span class="fst-italic">postEvent()</span>. La interfaz debe
+                            contener las propiedades necesarias para crear un nuevo evento en la API de eventos.</li>
+
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section id="alertas">
+            <h5>AlertService</h5>
+            <p>El servicio <span class="fst-italic">AlertService</span> proporciona una forma sencilla de mostrar
+                alertas y mensajes de confirmación en la aplicación. Utiliza la biblioteca SweetAlert2 para mostrar las
+                alertas.</p>
+            <strong>Métodos:</strong>
+            <ul class="ps-4">
+                <li>warning(title: string, text: string)</li>
+                <li>error(title: string, text: string)</li>
+                <li>success(title: string, text: string)</li>
+                <li>question(title: string, text: string, confirmButtonText: string):
+                    Devuelve una promesa de tipo <span class="fst-italic">SweetAlertResult</span> que se resuelve con el
+                    resultado de la alerta.</li>
+                <li>info(title: string, text: string)</li>
+            </ul>
+            <ul class="ps-4">
+                <li>EventService: Servicio que proporciona la información de los eventos.</li>
+                <li>AlertService: Servicio que proporciona métodos para mostrar alertas y notificaciones al usuario.
+                </li>
+            </ul>
+        </section>
+        <section id="ievent">
+            <h5>IEvent</h5>
+            <p>La interfaz <span class="fst-italic">IEvent</span> define la estructura de un objeto que representa un
+                evento. Esta interfaz se utiliza
+                para tipar los objetos que se pasan como parámetro al método <span class="fst-italic">postEvent</span>
+                del servicio <span class="fst-italic">EventService.</span></p>
+            <strong>Propiedades:</strong>
+            <ul class="ps-4">
+                <li>"id": Tipo <span class="fst-italic">number</span>, identificador único del evento.</li>
+                <li>"date": Tipo <span class="fst-italic">Date</span>, fecha del evento.</li>
+                <li>"description": Tipo <span class="fst-italic">string</span>, descripción del evento.</li>
+                <li>"type": Tipo <span class="fst-italic">string</span>, tipo de evento.</li>
+            </ul>
+        </section>
+        <section id="imenu">
+            <h5>IMenu</h5>
+            <p>La interfaz <span class="fst-italic">IMenu</span> define la estructura de un objeto que representa un
+                elemento de menú. Esta interfaz se utiliza para tipar los objetos que se pasan como parámetro al
+                componente <span class="fst-italic">SidebarComponent</span>.</p>
+            <strong>Propiedades:</strong>
+            <ul class="ps-4">
+                <li>"title": Tipo <span class="fst-italic">string</span>, título del elemento de menú.</li>
+                <li>"icon": Tipo <span class="fst-italic">string</span>, clase (NgBootstrap) de ícono del elemento de
+                    menú.</li>
+                <li>"title": Tipo <span class="fst-italic">string</span>, ruta asociada al elemento de menú.</li>
+            </ul>
+        </section>
+        <section id="ifilter">
+            <h5>IFilter</h5>
+            <p>La interfaz <span class="fst-italic">IFilter</span> define la estructura de un objeto que representa un
+                filtro de eventos. Esta interfaz se utiliza para tipar los objetos que se pasan como parámetro al
+                componente <span class="fst-italic">ConsultEventComponent</span>.</p>
+            <strong>Propiedades:</strong>
+            <ul class="ps-4">
+                <li>"type": Tipo <span class="fst-italic">string</span>, tipo de evento seleccionado.</li>
+                <li>"title": Tipo <span class="fst-italic">string</span>, fecha de inicio seleccionada.</li>
+                <li>"title": Tipo <span class="fst-italic">string</span>, fecha de fin seleccionada.</li>
+            </ul>
+        </section>
+        <section id="sidebar">
+            <h5>SidebarComponent</h5>
+            <p>Este componente es responsable de renderizar la barra lateral de navegación en la aplicación. Muestra una
+                lista de elementos de menú que permiten al usuario navegar entre diferentes secciones de la aplicación.
+            </p>
+            <strong>Propiedades:</strong>
+            <ul class="ps-4">
+                <li>menu: Arreglo de objetos que contiene la información de los elementos de menú.
+                    <ul>
+                        <li>title: Título del elemento de menú.</li>
+                        <li>icon: Clase de icono del elemento de menú.</li>
+                        <li>route: Ruta asociada al elemento de menú.</li>
+                    </ul>
+                </li>
+            </ul>
+            <strong>Uso:</strong>
+            <ol class="ps-5">
+                <li>Para utilizar este componente, simplemente se debe importar en el módulo correspondiente y agregarlo
+                    a
+                    la plantilla HTML.</li>
+                <li>Luego, se puede agregar el componente a la plantilla HTML instanciando el input <span
+                        class="fst-italic">menu</span>. Donde <span class="fst-italic">menu</span> es un arreglo de
+                    objetos
+                    que contiene la información de los elementos de menú.</li>
+            </ol>
+        </section>
+        <section id="registrar">
+            <h5>CreateEventComponent</h5>
+            <p>Este componente es responsable de crear nuevos eventos en la aplicación. Permite al usuario ingresar la
+                descripción del evento y seleccionar el tipo de respuesta.
+            </p>
+            <strong>Propiedades:</strong>
+            <ul class="ps-4">
+                <li>eventForm: Objeto que almacena la información del evento a crear.
+                    <ul>
+                        <li>type: Tipo de evento (manual por defecto).</li>
+                        <li>description: Descripción del evento.</li>
+                        <li>date: Fecha del evento (fecha actual por defecto).</li>
+                        <li>id: Identificador único del evento (generado aleatoriamente).</li>
+                    </ul>
+                </li>
+            </ul>
+            <strong>Métodos:</strong>
+            <ul class="ps-4">
+                <li>eventFormValid: Propiedad que indica si el formulario de evento es válido (la descripción no está
+                    vacía
+                    y se ha seleccionado un tipo de respuesta).</li>
+                <li>postEvent: Método que crea un nuevo evento en la base de datos. Muestra una alerta de confirmación
+                    antes
+                    de enviar la solicitud.</li>
+            </ul>
+        </section>
+        <section id="consultar">
+            <h5>ConsultEventComponent</h5>
+            <p>Este componente es responsable de consultar y filtrar eventos en la aplicación. Permite al usuario
+                seleccionar un tipo de evento, fecha de inicio y fecha de fin para filtrar los resultados.
+            </p>
+            <strong>Propiedades:</strong>
+            <ul class="ps-4">
+                <li>filters: Objeto que almacena los valores de los filtros seleccionados por el usuario.
+                    <ul>
+                        <li>type: Tipo de evento seleccionado.</li>
+                        <li>initDate: Fecha de inicio seleccionada.</li>
+                        <li>endDate: Fecha de fin seleccionada.</li>
+                    </ul>
+                </li>
+                <li>eventsInfo: Arreglo de objetos que contiene la información de los eventos.</li>
+                <li>eventType: Arreglo de strings que contiene los tipos de eventos disponibles.</li>
+                <li>responseType: Arreglo de strings que contiene los tipos de respuestas disponibles.</li>
+                <li>headers: Arreglo de strings que contiene los encabezados de la tabla de eventos.</li>
+            </ul>
+            <strong>Métodos:</strong>
+            <ul class="ps-4">
+                <li>ngOnInit: Método que se ejecuta al inicializar el componente. Obtiene la información de los eventos
+                    mediante el método <span class="fst-italic">getEvents</span>.</li>
+                <li>getEvents: Método que obtiene la información de los eventos mediante el servicio <span
+                        class="fst-italic">EventService</span>.</li>
+                <li>resetFilter: Método que reinicia los valores de los filtros.</li>
+                <li>buildFilter: Método que construye un objeto con los valores de los filtros seleccionados.</li>
+                <li>filterInformation: Método que filtra la información de los eventos en función de los valores de los
+                    filtros seleccionados.</li>
+                <li>search: Método que realiza una búsqueda de eventos en función de los valores de los filtros
+                    seleccionados.</li>
+                <li>validFilters: Propiedad que indica si hay algún filtro seleccionado.</li>
+            </ul>
+        </section>
+
     </div>
 </div>

@@ -1,8 +1,5 @@
 <div class="container">
     <h3>Formulario de eventos manuales</h3>
-    <div class="row mb-2">
-        <app-response-selector></app-response-selector>
-    </div>
     <div class="rounded border bg-white py-5">
         <div class="row justify-content-center">
             <div class="col-3 me-2">
@@ -34,7 +31,7 @@
             </div>
             <div class="col-auto">
                 <button type="button" class="btn button-primary" [disabled]="!eventFormValid"
-                    (click)="onSubmit()">Agregar
+                    (click)="postEvent()">Agregar
                 </button>
             </div>
         </div>

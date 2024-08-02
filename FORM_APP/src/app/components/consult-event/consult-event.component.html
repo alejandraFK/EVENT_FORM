@@ -1,8 +1,5 @@
 <div class="container">
     <h3>Información de eventos</h3>
-    <div class="row mb-2">
-        <app-response-selector></app-response-selector>
-    </div>
     <div class="row">
         <div class="rounded border py-4 bg-white px-5">
             <div class="d-flex justify-content-between">
@@ -22,7 +19,7 @@
             </div>
             <div class="d-flex justify-content-end mt-3">
                 <button type="button" class="w-auto btn button-primary" [disabled]="validFilters"
-                    (click)="onSubmit()">Buscar
+                    (click)="filterInformation()">Buscar
                     <i class="ms-2 bi bi-search"></i>
                 </button>
             </div>
@@ -34,7 +31,7 @@
         <= 0) { <span>Aún no hay resultados.</span>
             }@else {
             <div class="table-responsive">
-                <table class="table">
+                <table class="table border">
                     <thead>
                         <tr>
                             @for (item of headers; track $index) {
@@ -47,7 +44,7 @@
                         <tr>
                             <td>{{item.id}}</td>
                             <td>{{item.type}}</td>
-                            <td>{{item.date|date:'dd/MM/yyyy'}}</td>
+                            <td>{{item.date|date:'dd/MM/yyyy hh:mm'}}</td>
                             <td>{{item.description}}</td>
                         </tr>
                         }

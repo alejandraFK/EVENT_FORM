@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
   templateUrl: './documentation.component.html',
   styleUrl: './documentation.component.scss'
 })
-export class DocumentationComponent {
-
-}
+export class DocumentationComponent { }
