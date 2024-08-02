@@ -15,5 +15,5 @@ npm run start
 
 ## Paso 3: Visualizar en la web, de manera local
 
-#### Ingresar a [http://localhost:4200/] y será redirigido directamente a la página de la documentación. 
-#### Al lado izquierdo tendrá la barra lateral de navegación
+#### Ingresar a [http://localhost:4200/] y será redirigido directamente a la página de la documentación, y al lado izquierdo tendrá la barra lateral de navegación donde podrá encontrar el acceso a las diferentes páginas del sitio.
+#### Para encontrar más información de la aplicación visite [http://localhost:4200/documentation].
